@@ -156,8 +156,10 @@ function updateNowPlaying(data) {
   // Reset elapsed timer and refresh album art when track changes
   const trackKey = data.artist + "|" + data.title;
   if (lastTrackKey !== null && trackKey !== lastTrackKey) {
-    stopTimer();
-    startTimer();
+    if (isPlaying) {
+      stopTimer();
+      startTimer();
+    }
     coverImg.src = COVER_URL + "?t=" + Date.now();
   }
   lastTrackKey = trackKey;
@@ -294,7 +296,6 @@ function togglePlay() {
     audio.pause();
     destroyHls();
     stopTimer();
-    stopMetadataPolling();
     elapsedSeconds = 0;
     elapsedTime.textContent = formatTime(0);
     isPlaying = false;
@@ -306,7 +307,6 @@ function togglePlay() {
     playIcon.innerHTML = ICON_PAUSE;
     setStatus("", "Connecting...");
     initHls();
-    startMetadataPolling();
   }
 }
 
@@ -326,6 +326,10 @@ document.addEventListener("keydown", (e) => {
     togglePlay();
   }
 });
+
+// Start metadata polling immediately on page load so recently played
+// and now-playing info populate without needing to start the stream
+startMetadataPolling();
 
 // Handle audio element events
 audio.addEventListener("playing", () => {
