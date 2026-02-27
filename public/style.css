@@ -1,12 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --mint: #D8F2D5;
-  --forest: #1F4E23;
-  --teal: #38A29D;
+  --mint: #D6E9FF;
+  --forest: #1A3A6B;
+  --teal: #2A7DD2;
   --orange: #EFA63C;
-  --charcoal: #231F20;
-  --cream: #F5EADA;
+  --charcoal: #1A1F2E;
+  --cream: #EBF2FC;
   --white: #FFFFFF;
 }
 
@@ -268,7 +268,7 @@ main {
   transition: background 0.15s, transform 0.1s;
 }
 .btn-play:hover {
-  background: #2e8a85;
+  background: #1E6BB8;
 }
 .btn-play:active {
   transform: scale(0.95);
