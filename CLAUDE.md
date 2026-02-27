@@ -47,6 +47,23 @@ docker compose up --build
 
 All DB connection settings are read from environment variables with fallbacks to the defaults used in `docker-compose.yml`. See README.md for the full list.
 
+## Creating Pull Requests
+
+After creating a PR with `gh pr create`, always:
+
+1. Wait for the `Claude Code Review` workflow to complete:
+   ```bash
+   gh run watch --repo smifffystuff/radiocalico
+   ```
+2. Fetch and display the review comment posted to the PR:
+   ```bash
+   gh api repos/smifffystuff/radiocalico/issues/<PR_NUMBER>/comments \
+     --jq '.[] | select(.user.login == "claude[bot]") | .body'
+   ```
+3. Show the review content to the user before proceeding.
+
+The code review runs automatically on every PR via `.github/workflows/claude-code-review.yml` and posts its findings as a PR comment.
+
 ## Conventions
 
 - **No build step**: plain HTML/CSS/JS, no bundler, no transpilation.
