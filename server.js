@@ -3,14 +3,14 @@ const path = require("path");
 const { Pool } = require("pg");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: "radiocalico",
-  password: "radiocalico",
-  database: "radiocalico",
+  host: process.env.DB_HOST || "localhost",
+  port: process.env.DB_PORT || 5432,
+  user: process.env.DB_USER || "radiocalico",
+  password: process.env.DB_PASSWORD || "radiocalico",
+  database: process.env.DB_NAME || "radiocalico",
 });
 
 app.use(express.json());
@@ -95,5 +95,5 @@ app.post("/api/ratings", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });

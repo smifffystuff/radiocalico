@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker compose up --build"
   },
   "keywords": [],
   "author": "",
